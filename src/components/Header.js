@@ -1,10 +1,11 @@
 import React from 'react';
+import '../Header.css';
 
 class Header extends React.Component {
     render() {
         return(
-            <div>
-                <h1>Welcome to weather App</h1>
+            <div className="header-h">
+                <h1>React Weather App</h1>
             </div>
         )
     }

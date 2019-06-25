@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Form from './components/Form';
 import Weather from './components/Weather';
 import './App.css';
+import './Weather.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Api_Key = '1101c777c19f28cb85b1d7b77d88e6a6';
@@ -11,11 +12,12 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      temperature: '',
-      city: '',
-      country: '',
+      temperature: 'Temperature',
+      city: 'City',
+      country: 'Country',
       description: '',
-      condition: '',
+      condition: 'Condition',
+      date: '',
       error: ''
     }
   }
@@ -24,7 +26,7 @@ class App extends Component {
     const city =  e.target.elements.city.value;
     const country = e.target.elements.country.value;
     e.preventDefault();
-    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Api_Key}`);
+    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Api_Key}&units=metric`);
     const response = await api_call.json();
     console.log(response);
     if(city && country) {
@@ -43,18 +45,30 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    this.getDate();
+  }
+
+  getDate = () => {
+    var date = new Date().toDateString();
+    this.setState({ date });
+  }
+
   render() {
+    const { date } = this.state;
     return(
       <React.Fragment>
         <div className="container">
           <div className="header">
-            <Header />
+            <Header /> 
           </div>
           <div className="row">
-            <div className="col-12">
+            <div className="col-sm-4">
               <div className="get-weather">
                 <Form getWeather={this.getWeather}/>
               </div>
+            </div>
+            <div className="col-sm-8">
               <div className="data-weather">
                 <Weather 
                   temperature={this.state.temperature}
@@ -62,6 +76,8 @@ class App extends Component {
                   country={this.state.country}
                   description={this.state.description}
                   condition={this.state.condition}
+                  degree={this.state.degree}
+                  date={date}
                 />
               </div>
             </div>

@@ -1,19 +1,25 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 
 class Weather extends React.Component {
     render() {
         return(
-            <div>
-                <p className="weather_key"> Temperature:        {this.props.temperature}
-                </p>
-                <p className="weather_key"> City:                    {this.props.city}
-                </p>
-                <p className="weather_key"> Country:                    {this.props.country}
-                </p>
-                <p className="weather_key"> description:         {this.props.description}
-                </p>
-                <p className="weather_key"> Condition:         {this.props.condition}
-                </p>
+            <div className="weather-board text-muted">
+                <div className="city_name">
+                    <h3 className="city-fade-name">
+                        <FontAwesomeIcon icon={faMapMarkerAlt} />  &nbsp;
+                        {this.props.city}, {this.props.country}
+                    </h3>
+                </div>
+                <div className="local-currentDay">
+                    {this.props.date}
+                </div>
+                <div className="condition">
+                {/* {'\u2728'} */}
+                    {this.props.condition.toUpperCase()} <br/>
+                    {this.props.temperature} &deg;C
+                </div>
             </div>
         )
     }

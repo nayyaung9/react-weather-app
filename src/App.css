@@ -1,8 +1,9 @@
 body {
-  background: #f1f1f1 !important;
+  background:  	#0085ca !important;
 }
 .header {
   padding: 20px;
+  color: #fff;
 }
 .get-weather, .data-weather {
   padding: 20px;
