@@ -1,5 +1,4 @@
 .weather-board {
-    padding: 20px;
     font-family: 'Ubuntu', sans-serif;
 }
 .city_name, .condition, .local-currentDay {

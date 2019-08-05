@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from './components/Header';
+// import Header from './components/Header';
 import Form from './components/Form';
 import Weather from './components/Weather';
 import './App.css';
@@ -12,12 +12,14 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      temperature: 'Temperature',
+      temperature: '0',
       city: 'City',
       country: 'Country',
       description: '',
-      condition: 'Condition',
+      condition: '',
+      icon: '',
       date: '',
+      humidity: '0',
       error: ''
     }
   }
@@ -36,6 +38,8 @@ class App extends Component {
         country: response.sys.country,
         description: response.weather[0].description,
         condition: response.weather[0].main,
+        humidity: response.main.humidity,
+        icon: response.weather[0].icon,
         error: ""
       })
     } else {
@@ -60,15 +64,11 @@ class App extends Component {
       <React.Fragment>
         <div className="container">
           <div className="header">
-            <Header /> 
+            {/* <Header />  */}
           </div>
           <div className="row">
-            <div className="col-sm-4">
-              <div className="get-weather">
-                <Form getWeather={this.getWeather}/>
-              </div>
-            </div>
-            <div className="col-sm-8">
+            
+            <div className="col-sm-8 mobile-view">
               <div className="data-weather">
                 <Weather 
                   temperature={this.state.temperature}
@@ -76,9 +76,15 @@ class App extends Component {
                   country={this.state.country}
                   description={this.state.description}
                   condition={this.state.condition}
-                  degree={this.state.degree}
+                  humidity={this.state.humidity}
+                  icon={this.state.icon}
                   date={date}
                 />
+              </div>
+            </div>
+            <div className="col-sm-4">
+              <div className="get-weather">
+                <Form getWeather={this.getWeather}/>
               </div>
             </div>
           </div>
